@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ninja Hub</title>
+    <title>Ninja Hub - Center</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -17,14 +17,16 @@
         }
 
         h1 { 
-            margin-bottom: 30px; 
+            margin-bottom: 40px; 
             background: linear-gradient(to right, #00ff88, #00ffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 30px;
+            font-size: 35px;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
 
-        /* ส่วนสำคัญ: ตัวจัดการให้แอปเรียงกัน */
+        /* โซนแสดงแอป */
         .app-container {
             display: flex;
             flex-wrap: wrap;
@@ -40,13 +42,14 @@
             padding: 30px 15px;
             text-align: center;
             overflow: hidden;
-            width: 280px; /* ล็อคขนาดการ์ดให้เท่ากัน */
+            width: 280px;
             display: flex;
             flex-direction: column;
             align-items: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
+        /* ขอบรุ้งหมุน */
         .app-card::before {
             content: '';
             position: absolute;
@@ -91,6 +94,34 @@
         }
 
         .download-btn:active { transform: scale(0.9); box-shadow: 0 0 15px #fff; }
+
+        /* โซนลิงก์ต่อท้าย */
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 50px; /* เว้นระยะจากแอป */
+        }
+
+        .link-btn {
+            text-decoration: none;
+            color: #00ff88;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #00ff88;
+            transition: 0.3s;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .link-btn:hover {
+            background: #00ff88;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -98,7 +129,6 @@
     <h1>NINJA HUB</h1>
 
     <div class="app-container">
-
         <div class="app-card">
             <div class="content">
                 <img src="https://i.ibb.co/nqyZbsL9/Delta-Executor.webp" class="app-icon">
@@ -116,29 +146,15 @@
                 <a href="https://cdn.discordapp.com/attachments/1449067074746843218/1451772502526398565/Freefire.Private.2.20.1BY_KALLIDADE_LUGAMi_AHAM_FEAR_DRIR__BLG_E_KAITO.apk?ex=694caa01&is=694b5881&hm=b8ca63c7bf4352a1383ee5b7f4a34cc648e7c228ced173100d89407a77e31753&" class="download-btn">DOWNLOAD</a>
             </div>
         </div>
-
     </div>
-            <div class="app-card">
-            <div class="content">
-                <img src="ใส่ลิงก์รูปภาพที่นี่" class="app-icon">
-                <div class="app-name">ชื่อแอปใหม่</div>
-                <div class="app-version">เวอร์ชันแอป</div>
-                <a href="ใส่ลิงก์ดาวน์โหลดที่นี่" class="download-btn">DOWNLOAD</a>
-            </div>
-        </div>
-        ```
 
----
-
-### 2. โค้ดสำหรับเพิ่มปุ่มลิงก์ (สมัครไอดี / ดิสคอร์ด)
-ถ้าจะเอาปุ่มลิงก์ไปวางไว้ล่างสุดของหน้าเว็บ ให้วางไว้ **ก่อนหน้า** คำว่า `</body>` ครับ:
-
-```html
     <div class="footer-links">
         <a href="https://register.luna-corp.online/register" target="_blank" class="link-btn">📝 สมัครไอดีฟีฟาย</a>
         <a href="https://discord.gg/freefirebeta" target="_blank" class="link-btn">🎧 ดิสเเจกคีย์</a>
     </div>
-    
+
+    <p style="margin-top: 40px; color: #333; font-size: 11px;">Update: Dec 2025</p>
+
 </body>
 </html>
 
