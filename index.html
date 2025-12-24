@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ninja Hub - Center</title>
+    <title>Ninja Hub</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -23,10 +23,8 @@
             -webkit-text-fill-color: transparent;
             font-size: 35px;
             font-weight: 900;
-            letter-spacing: 2px;
         }
 
-        /* โซนแสดงแอป */
         .app-container {
             display: flex;
             flex-wrap: wrap;
@@ -49,7 +47,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* ขอบรุ้งหมุน */
         .app-card::before {
             content: '';
             position: absolute;
@@ -95,14 +92,13 @@
 
         .download-btn:active { transform: scale(0.9); box-shadow: 0 0 15px #fff; }
 
-        /* โซนลิงก์ต่อท้าย */
         .footer-links {
             display: flex;
             flex-direction: column;
             gap: 12px;
             width: 100%;
             max-width: 300px;
-            margin-top: 50px; /* เว้นระยะจากแอป */
+            margin-top: 50px;
         }
 
         .link-btn {
@@ -118,10 +114,7 @@
             background: rgba(0, 255, 136, 0.05);
         }
 
-        .link-btn:hover {
-            background: #00ff88;
-            color: #000;
-        }
+        .link-btn:hover { background: #00ff88; color: #000; }
     </style>
 </head>
 <body>
@@ -152,8 +145,6 @@
         <a href="https://register.luna-corp.online/register" target="_blank" class="link-btn">📝 สมัครไอดีฟีฟาย</a>
         <a href="https://discord.gg/freefirebeta" target="_blank" class="link-btn">🎧 ดิสเเจกคีย์</a>
     </div>
-
-    <p style="margin-top: 40px; color: #333; font-size: 11px;">Update: Dec 2025</p>
 
 </body>
 </html>
