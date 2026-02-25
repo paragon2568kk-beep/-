@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOCKED SYSTEM</title>
+<title>SECURE SYSTEM</title>
 
 <style>
 body{
@@ -10,11 +10,34 @@ body{
   background:black;
   color:#00ff00;
   font-family:monospace;
+  overflow:hidden;
+}
+
+/* หน้าโหลด */
+#loading{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
+  font-size:22px;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  50%{opacity:0.3;}
+}
+
+/* กล่องรหัส */
+#loginBox{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   text-align:center;
+  display:none;
 }
 
 input{
@@ -22,6 +45,7 @@ input{
   border:1px solid #00ff00;
   color:#00ff00;
   padding:10px;
+  text-align:center;
 }
 
 button{
@@ -29,48 +53,51 @@ button{
   border:1px solid #00ff00;
   color:#00ff00;
   padding:10px 20px;
-  margin-top:10px;
   cursor:pointer;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
+<div id="loading">INITIALIZING SYSTEM...</div>
+
 <div id="loginBox">
   <h2>ENTER PASSWORD</h2>
-  <input type="password" id="pass">
+  <input type="password" id="pass" placeholder="Password">
   <br>
   <button onclick="checkPass()">ACCESS</button>
   <p id="msg"></p>
 </div>
 
-<audio id="bgm" loop>
+<audio id="bgm">
   <source src="alarm.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
+// โหลด 3 วิ
+setTimeout(function(){
+  document.getElementById("loading").style.display="none";
+  document.getElementById("loginBox").style.display="block";
+},3000);
+
+// รหัสผ่าน
 var password = "1234";
 
 function checkPass(){
   var input = document.getElementById("pass").value;
 
   if(input === password){
+    document.getElementById("loginBox").style.display="none";
 
-    // ซ่อนกล่องล็อกอิน
-    document.getElementById("loginBox").style.display = "none";
-
-    // ทำจอดำเต็ม
-    document.body.style.background = "black";
-
-    // เล่นเสียง
     var sound = document.getElementById("bgm");
     sound.volume = 1.0;
     sound.play();
 
-  } else {
-    document.getElementById("msg").innerHTML = "ACCESS DENIED";
+  }else{
+    document.getElementById("msg").innerHTML="ACCESS DENIED";
   }
 }
 
