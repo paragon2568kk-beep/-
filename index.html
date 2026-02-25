@@ -16,6 +16,11 @@ body{
   justify-content:center;
   align-items:center;
   overflow:hidden;
+  transition:background 0.1s;
+}
+
+.flash{
+  background:white !important;
 }
 
 #loading{
@@ -71,12 +76,32 @@ button{
   <p id="msg"></p>
 </div>
 
-<!-- เพลงพื้นหลัง -->
 <audio id="bgMusic" loop>
   <source src="https://files.catbox.moe/8zj8dz.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
+// เอฟเฟกต์กระพริบจอ
+function flashScreen(times){
+  let count = 0;
+  let interval = setInterval(function(){
+    document.body.classList.toggle("flash");
+    count++;
+    if(count >= times*2){
+      clearInterval(interval);
+      document.body.classList.remove("flash");
+    }
+  },100);
+}
+
+// สั่น + กระพริบตอนเปิดเว็บ
+window.onload = function(){
+  if(navigator.vibrate){
+    navigator.vibrate([200,100,200]);
+  }
+  flashScreen(3);
+};
 
 // โหลด 3 วิ
 setTimeout(function(){
@@ -84,7 +109,6 @@ setTimeout(function(){
   document.getElementById("loginBox").style.display="block";
 },3000);
 
-// รหัสผ่าน
 var password = "1234";
 
 function checkPass(){
@@ -92,20 +116,29 @@ function checkPass(){
   if(input === password){
     document.getElementById("msg").innerHTML="ACCESS GRANTED";
     document.getElementById("bgMusic").play();
+
+    if(navigator.vibrate){
+      navigator.vibrate([300,100,300,100,500]);
+    }
+    flashScreen(6);
     lockBackButton();
+
   }else{
     document.getElementById("msg").innerHTML="ACCESS DENIED";
+
+    if(navigator.vibrate){
+      navigator.vibrate(200);
+    }
+    flashScreen(2);
   }
 }
 
-// กด Enter ได้
 document.getElementById("pass").addEventListener("keyup", function(event){
   if(event.key === "Enter"){
     checkPass();
   }
 });
 
-// ล็อกปุ่มย้อนกลับ (เสียงไม่หยุด)
 function lockBackButton(){
   history.pushState(null, null, location.href);
   window.onpopstate = function(){
