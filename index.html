@@ -72,8 +72,8 @@ input,button{
 </div>
 
 <div id="cookieBox">
-  เว็บไซต์นี้ใช้คุกกี้เพื่อความปลอดภัย<br>
-  <button onclick="acceptCookies()">ยอมรับ</button>
+  เว็บไซต์นี้ต้องการใช้คุกกี้เพื่อจดจำการเข้าสู่ระบบ<br>
+  <button onclick="acceptCookies()">ยอมรับคุกกี้</button>
 </div>
 
 <audio id="bgMusic" loop>
@@ -82,27 +82,38 @@ input,button{
 
 <script>
 
-// โหลด 2 วิ แล้วโชว์ cookie
+// ตรวจว่ารับคุกกี้แล้วหรือยัง
+function hasAcceptedCookies(){
+  return document.cookie.includes("accepted=true");
+}
+
+// โหลดหน้า
 setTimeout(function(){
   document.getElementById("loading").style.display="none";
-  document.getElementById("cookieBox").style.display="block";
+  
+  if(hasAcceptedCookies()){
+    document.getElementById("loginBox").style.display="block";
+  }else{
+    document.getElementById("cookieBox").style.display="block";
+  }
 },2000);
 
+// กดยอมรับคุกกี้
 function acceptCookies(){
-  document.cookie = "accepted=true; path=/";
+  document.cookie = "accepted=true; path=/; max-age=31536000";
   document.getElementById("cookieBox").style.display="none";
   document.getElementById("loginBox").style.display="block";
   vibrateAndFlash([200,100,200],3);
 }
 
-// ระบบสั่น + กระพริบ (แก้ให้ชัด)
+// สั่น + กระพริบ
 function vibrateAndFlash(pattern,times){
-  if(navigator.vibrate){
+  if("vibrate" in navigator){
     navigator.vibrate(pattern);
   }
 
   let i=0;
-  let fx = setInterval(function(){
+  let fx=setInterval(function(){
     document.body.classList.toggle("flash");
     i++;
     if(i>=times*2){
@@ -127,7 +138,7 @@ function checkPass(){
   }
 }
 
-// กด Enter ได้
+// Enter ได้
 document.getElementById("pass").addEventListener("keyup",function(e){
   if(e.key==="Enter"){
     checkPass();
