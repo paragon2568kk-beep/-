@@ -58,11 +58,13 @@ function checkPass(){
 
   if(input === password){
 
-    // ลบทุกอย่างในหน้าออก
-    document.body.innerHTML = "";
+    // ซ่อนกล่องล็อกอิน
+    document.getElementById("loginBox").style.display = "none";
+
+    // ทำจอดำเต็ม
     document.body.style.background = "black";
 
-    // เล่นเสียงทันที
+    // เล่นเสียง
     var sound = document.getElementById("bgm");
     sound.volume = 1.0;
     sound.play();
