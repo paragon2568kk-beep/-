@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SECURE ACCESS</title>
+
 <style>
 body{
   margin:0;
@@ -7,7 +13,6 @@ body{
   overflow:hidden;
 }
 
-/* หน้าโหลด */
 #loading{
   position:fixed;
   width:100%;
@@ -16,8 +21,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:22px;
-  letter-spacing:2px;
+  font-size:20px;
   animation:blink 1s infinite;
 }
 
@@ -25,7 +29,6 @@ body{
   50%{opacity:0.3;}
 }
 
-/* กล่องล็อกอินใหม่ */
 #loginBox{
   position:absolute;
   top:50%;
@@ -33,57 +36,24 @@ body{
   transform:translate(-50%,-50%);
   text-align:center;
   display:none;
-  padding:40px;
-  width:280px;
-
-  background:rgba(0,0,0,0.7);
-  border:1px solid #00ff00;
-  box-shadow:0 0 20px #00ff00;
-  backdrop-filter:blur(5px);
 }
 
-/* หัวข้อ */
-#loginBox h2{
-  margin-bottom:20px;
-  letter-spacing:3px;
-}
-
-/* input */
 input{
-  width:100%;
   background:black;
   border:1px solid #00ff00;
   color:#00ff00;
-  padding:12px;
-  text-align:center;
-  outline:none;
-  transition:0.3s;
+  padding:10px;
 }
 
-input:focus{
-  box-shadow:0 0 10px #00ff00;
-}
-
-/* ปุ่ม */
 button{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
   background:black;
   border:1px solid #00ff00;
   color:#00ff00;
+  padding:10px 20px;
   cursor:pointer;
-  transition:0.3s;
-  letter-spacing:2px;
+  margin-top:10px;
 }
 
-button:hover{
-  background:#00ff00;
-  color:black;
-  box-shadow:0 0 15px #00ff00;
-}
-
-/* canvas matrix */
 canvas{
   position:fixed;
   top:0;
@@ -91,3 +61,98 @@ canvas{
   display:none;
 }
 </style>
+</head>
+
+<body>
+
+<div id="loading">INITIALIZING SYSTEM...</div>
+
+<div id="loginBox">
+  <h2>ENTER PASSWORD</h2>
+  <input type="password" id="pass" placeholder="Password">
+  <br>
+  <button onclick="checkPass()">ACCESS</button>
+  <p id="msg"></p>
+</div>
+
+<canvas id="matrix"></canvas>
+
+<!-- YouTube ซ่อนวิดีโอ -->
+<iframe id="ytplayer"
+width="0"
+height="0"
+src="https://www.youtube.com/embed/SV-IPNemEkY?loop=1&playlist=SV-IPNemEkY"
+frameborder="0"
+allow="autoplay">
+</iframe>
+
+<script>
+
+// โหลด 3 วิ
+setTimeout(function(){
+  document.getElementById("loading").style.display="none";
+  document.getElementById("loginBox").style.display="block";
+},3000);
+
+// เปลี่ยนรหัสตรงนี้
+var password = "1234";
+
+function checkPass(){
+  var input = document.getElementById("pass").value;
+  if(input === password){
+    document.getElementById("loginBox").style.display="none";
+    startSystem();
+    startMusic();
+  }else{
+    document.getElementById("msg").innerHTML="ACCESS DENIED";
+  }
+}
+
+function startMusic(){
+  var player = document.getElementById("ytplayer");
+  player.src += "&autoplay=1";
+}
+
+function startSystem(){
+  var c = document.getElementById("matrix");
+  c.style.display="block";
+  var ctx = c.getContext("2d");
+
+  c.height = window.innerHeight;
+  c.width = window.innerWidth;
+
+  var letters = "01";
+  letters = letters.split("");
+
+  var font_size = 14;
+  var columns = c.width/font_size;
+  var drops = [];
+
+  for(var x = 0; x < columns; x++)
+  drops[x] = 1;
+
+  function draw(){
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,c.width,c.height);
+
+    ctx.fillStyle="#0F0";
+    ctx.font = font_size + "px monospace";
+
+    for(var i=0;i<drops.length;i++){
+      var text = letters[Math.floor(Math.random()*letters.length)];
+      ctx.fillText(text,i*font_size,drops[i]*font_size);
+
+      if(drops[i]*font_size>c.height && Math.random()>0.975)
+      drops[i]=0;
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw,33);
+}
+
+</script>
+
+</body>
+</html>
