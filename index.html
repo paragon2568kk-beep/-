@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOCKED</title>
+<title>LOCKED SYSTEM</title>
 
 <style>
 body{
@@ -37,31 +37,38 @@ button{
 
 <body>
 
-<div>
+<div id="loginBox">
   <h2>ENTER PASSWORD</h2>
-  <input type="password" id="pass" placeholder="Password">
+  <input type="password" id="pass">
   <br>
   <button onclick="checkPass()">ACCESS</button>
   <p id="msg"></p>
 </div>
 
-<audio id="bgm">
+<audio id="bgm" loop>
   <source src="alarm.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-var password = "1234"; // เปลี่ยนรหัสตรงนี้ได้
+var password = "1234";
 
 function checkPass(){
   var input = document.getElementById("pass").value;
 
   if(input === password){
+
+    // ลบทุกอย่างในหน้าออก
+    document.body.innerHTML = "";
+    document.body.style.background = "black";
+
+    // เล่นเสียงทันที
     var sound = document.getElementById("bgm");
-    sound.volume = 1.0; // ดังสุด
-    sound.play();      // เล่นทันที
-  }else{
-    document.getElementById("msg").innerHTML="ACCESS DENIED";
+    sound.volume = 1.0;
+    sound.play();
+
+  } else {
+    document.getElementById("msg").innerHTML = "ACCESS DENIED";
   }
 }
 
