@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SECURE ACCESS</title>
+<title>SECURE SYSTEM</title>
 
 <style>
 body{
@@ -13,6 +13,7 @@ body{
   overflow:hidden;
 }
 
+/* หน้าโหลด */
 #loading{
   position:fixed;
   width:100%;
@@ -21,7 +22,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:20px;
+  font-size:22px;
   animation:blink 1s infinite;
 }
 
@@ -29,6 +30,7 @@ body{
   50%{opacity:0.3;}
 }
 
+/* กล่องรหัส */
 #loginBox{
   position:absolute;
   top:50%;
@@ -53,13 +55,6 @@ button{
   cursor:pointer;
   margin-top:10px;
 }
-
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  display:none;
-}
 </style>
 </head>
 
@@ -75,16 +70,9 @@ canvas{
   <p id="msg"></p>
 </div>
 
-<canvas id="matrix"></canvas>
-
-<!-- YouTube ซ่อนวิดีโอ -->
-<iframe id="ytplayer"
-width="0"
-height="0"
-src="https://www.youtube.com/embed/SV-IPNemEkY?loop=1&playlist=SV-IPNemEkY"
-frameborder="0"
-allow="autoplay">
-</iframe>
+<audio id="bgm" loop>
+  <source src="alarm.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
@@ -99,57 +87,19 @@ var password = "1234";
 
 function checkPass(){
   var input = document.getElementById("pass").value;
+
   if(input === password){
     document.getElementById("loginBox").style.display="none";
-    startSystem();
-    startMusic();
+    startAlarm();
   }else{
     document.getElementById("msg").innerHTML="ACCESS DENIED";
   }
 }
 
-function startMusic(){
-  var player = document.getElementById("ytplayer");
-  player.src += "&autoplay=1";
-}
-
-function startSystem(){
-  var c = document.getElementById("matrix");
-  c.style.display="block";
-  var ctx = c.getContext("2d");
-
-  c.height = window.innerHeight;
-  c.width = window.innerWidth;
-
-  var letters = "01";
-  letters = letters.split("");
-
-  var font_size = 14;
-  var columns = c.width/font_size;
-  var drops = [];
-
-  for(var x = 0; x < columns; x++)
-  drops[x] = 1;
-
-  function draw(){
-    ctx.fillStyle = "rgba(0,0,0,0.05)";
-    ctx.fillRect(0,0,c.width,c.height);
-
-    ctx.fillStyle="#0F0";
-    ctx.font = font_size + "px monospace";
-
-    for(var i=0;i<drops.length;i++){
-      var text = letters[Math.floor(Math.random()*letters.length)];
-      ctx.fillText(text,i*font_size,drops[i]*font_size);
-
-      if(drops[i]*font_size>c.height && Math.random()>0.975)
-      drops[i]=0;
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(draw,33);
+function startAlarm(){
+  var sound = document.getElementById("bgm");
+  sound.volume = 1.0; // ดังสุด
+  sound.play();
 }
 
 </script>
